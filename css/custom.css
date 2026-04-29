@@ -29555,7 +29555,7 @@ article.bc-stepper-vertical .bc-stepper-step .bc-stepper-label label {
 .bc-alert,
 .bc-alert-active {
     width: 100%;
-    background-color: #fff;
+    background-color: #454648;
     flex-direction: row;
     display: none
 }
