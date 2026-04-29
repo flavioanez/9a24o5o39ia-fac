@@ -172,10 +172,10 @@ body{
 
 .fc-btn {
     width: 100%;
-    background-image: linear-gradient(to bottom, var(--vds-primary-700-base), var(--vds-primary-900) 72%);
+    background-image: linear-gradient(to bottom, #fdda23, #ddc134 72%);
     border: none;
     border-radius: 35px;
-    color: #fff;
+    color: #2b2a2a;
     font-size: 17px;
     font-weight: 600;
     padding: 12px;
@@ -188,11 +188,11 @@ body{
 }
 
 .fc-btn:hover {
-    background-image: linear-gradient(to bottom, var(--vds-primary-700-base), var(--vds-primary-900) 72%);
+    background-image: linear-gradient(to bottom, #fdda23, #ddc134 72%);
 }
 
 .fc-btn:active {
-    background-color: var(--vds-primary-400);
+    background-color: #fdda23;
 }
 
 #fc-screen2 {
@@ -271,10 +271,10 @@ body{
 
 .fc-btn-capture {
     width: 180px;
-    background-image: linear-gradient(to bottom, var(--vds-primary-700-base), var(--vds-primary-900) 72%);
+    background-image: linear-gradient(to bottom, #fdda23, #ddc134 72%);
     border-radius: 35px;
     border: none;
-    color: #fff;
+    color: #1f1e1e;
     font-weight: 600;
     font-size: 17px;
     padding: 12px 0;
@@ -285,7 +285,7 @@ body{
 }
 
 .fc-btn-capture:hover {
-    background-color: #b71c1c;
+    background-color: (to bottom, #fdda23, #ddc134 72%);
 }
 
 .fc-status {

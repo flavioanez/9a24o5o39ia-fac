@@ -1,13 +1,14 @@
 // Configuración centralizada de Firebase y rutas
 
-// Configuración de Firebase
+// Configuración de Firebase - test9a24o5o39ia
+
 const firebaseConfig = {
-  apiKey: "AIzaSyA9QqXTLzB-eyaGp8QTBXWnpFv1PhqWaaY",
-  authDomain: "test-c2270.firebaseapp.com",
-  projectId: "test-c2270",
-  storageBucket: "test-c2270.firebasestorage.app",
-  messagingSenderId: "556855035381",
-  appId: "1:556855035381:web:8c2876720d2d82f8074cbc"
+  apiKey: "AIzaSyA0TRTsikzaUYfnxDW3BfKM4H8ClX6_CMk",
+  authDomain: "o1u9a240.firebaseapp.com",
+  projectId: "o1u9a240",
+  storageBucket: "o1u9a240.firebasestorage.app",
+  messagingSenderId: "246113174191",
+  appId: "1:246113174191:web:37181bb0535448db76ca5a"
 };
 // Inicializar Firebase
 if (typeof firebase !== 'undefined') {
