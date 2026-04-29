@@ -30235,7 +30235,8 @@ article.bc-stepper-vertical .bc-stepper-step .bc-stepper-label label {
     font-synthesis: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-weight: normal
+    font-weight: normal;
+    color: #454648;
 }
 
 .bc-inline-alert-body .bc-inline-alert-content .bc-inline-alert-text {
@@ -30246,7 +30247,8 @@ article.bc-stepper-vertical .bc-stepper-step .bc-stepper-label label {
     letter-spacing: 0px;
     font-synthesis: none;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale
+    -moz-osx-font-smoothing: grayscale;
+    color: #454648;
 }
 
 .bc-inline-alert-body .bc-inline-alert-buttons {
@@ -30258,7 +30260,8 @@ article.bc-stepper-vertical .bc-stepper-step .bc-stepper-label label {
 .bc-inline-alert-body .bc-inline-alert-buttons ul {
     list-style: none;
     display: flex;
-    gap: 8px
+    gap: 8px;
+    /* color: #454648; */
 }
 
 .bc-inline-alert-body .bc-inline-alert-buttons:empty {
@@ -30329,7 +30332,7 @@ article.bc-stepper-vertical .bc-stepper-step .bc-stepper-label label {
 
 .bc-inline-alert-info {
     border-color: #59cbe8;
-    background: #454648
+    background: #CCEFF8;
 }
 
 .bc-inline-alert-neutral {
@@ -31972,7 +31975,8 @@ section.bc-sidebar[type=states]>aside[aria-label] nav[aria-label] ul li>button.b
 
 .bc-fm-fld>em:first-child {
     left: 0;
-    width: 24px
+    width: 24px;
+    color: #454648
 }
 
 .bc-fm-fld>input+em {
@@ -32067,8 +32071,8 @@ bc-fm-fld[disabled] div {
 .bc-input-area[id] {
     background-color: rgba(0, 0, 0, 0);
     border: none;
-    border-bottom: 1px solid #fff;
-    color: #fff;
+    border-bottom: 1px solid #454648;
+    color: #454648;
     display: block;
     height: 32px;
     left: 0px;
@@ -32338,7 +32342,7 @@ img~.bc-input-icon-left.bc-input-area[id] {
 .bc-input-value.bc-input[id]::placeholder,
 .bc-input-value.bc-input-area[aria-label]::placeholder,
 .bc-input-value.bc-input-area[id]::placeholder {
-    color: #fff;
+    color: #454648;
     font-family: "Open Sans SemiBold", "Segoe UI Semibold", "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif, -apple-system, BlinkMacSystemFont, system-ui;
     font-weight: 600;
     font-size: 1rem;
@@ -32354,7 +32358,7 @@ img~.bc-input-icon-left.bc-input-area[id] {
 .bc-input-area[aria-label]::placeholder,
 .bc-input-area[id]::placeholder {
     opacity: .4;
-    color: #fff;
+    color: #454648;
     font-family: "Open Sans SemiBold", "Segoe UI Semibold", "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif, -apple-system, BlinkMacSystemFont, system-ui;
     font-weight: 600;
     font-size: 1rem;
@@ -32404,7 +32408,7 @@ img~.bc-input-icon-left.bc-input-area[id] {
 .bc-input[id]:focus~span,
 .bc-input-area[aria-label]:focus~span,
 .bc-input-area[id]:focus~span {
-    color: #fff
+    color: #454648
 }
 
 .bc-input[aria-label]:focus,
@@ -32478,8 +32482,8 @@ img~.bc-input-icon-left.bc-input-area[id] {
 .bc-input-area[id] {
     background-color: rgba(0, 0, 0, 0);
     border: none;
-    border-bottom: 1px solid #fff;
-    color: #fff;
+    border-bottom: 1px solid #454648;
+    color: #454648;
     display: block;
     height: 30px;
     left: 0px;
@@ -32561,13 +32565,13 @@ em~.bc-input[id] {
 
 .bc-input[aria-label]+em .bc-valid-feedback,
 .bc-input[id]+em .bc-valid-feedback {
-    color: #fff;
+    color: #454648;
     font-size: 0.75rem;
 }
 
 .bc-input[aria-label]+em .bc-span-info,
 .bc-input[id]+em .bc-span-info {
-    color: #fff
+    color: #454648
 }
 
 em+input[type=date]~label[for] {
@@ -32690,12 +32694,12 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0px 1000px #353537 inset;
     box-shadow: 0 0 0px 1000px #353537 inset;
-    -webkit-text-fill-color: #fff
+    -webkit-text-fill-color: #454648
 }
 
 input::first-line {
-    color: #fff;
-    -webkit-text-fill-color: #fff
+    color: #454648;
+    -webkit-text-fill-color: #454648
 }
 
 .bc-card-select-active .bc-input[aria-label],
@@ -33472,13 +33476,13 @@ input::first-line {
 }
 
 .bc-dropdown-active .bc-dropdown-triangle.outline-element {
-    outline: 3px solid #fff;
+    outline: 3px solid #454648;
     outline: auto
 }
 
 @media only screen and (min-width: 576px) {
     .bc-dropdown-active .bc-dropdown-triangle.outline-element {
-        outline: 3px solid #fff;
+        outline: 3px solid #454648;
         outline: auto
     }
 }
@@ -33886,13 +33890,13 @@ bc-modal .bc-card-select-content-footer {
 }
 
 .bc-card-select-active .bc-card-select-triangle.outline-element {
-    outline: 3px solid #fff;
+    outline: 3px solid #454648;
     outline: auto
 }
 
 @media only screen and (min-width: 576px) {
     .bc-card-select-active .bc-card-select-triangle.outline-element {
-        outline: 3px solid #fff;
+        outline: 3px solid #454648;
         outline: auto
     }
 }
@@ -33933,7 +33937,7 @@ bc-modal .bc-card-select-content-footer {
 .bc-card-select-active .bc-card-select-input-control>em,
 .bc-card-select-active .bc-card-select-input-control bc-icon {
     position: absolute;
-    color: #fff;
+    color: #454648;
     top: 4px;
     font-size: 1.5rem;
 }
@@ -33943,7 +33947,7 @@ bc-modal .bc-card-select-content-footer {
 .bc-card-select-active .bc-card-select-input-control>img,
 .bc-card-select-active .bc-card-select-input-control bc-icon {
     position: absolute;
-    color: #fff;
+    color: #454648;
     top: 4px;
     font-size: 1.5rem;
 }
@@ -34339,13 +34343,13 @@ bc-modal .bc-card-select-content-footer {
 
 .bc-card-select-content-active ul::-webkit-scrollbar-thumb,
 .bc-card-select-dropdown-active-fullwidth ul::-webkit-scrollbar-thumb {
-    background: #fff;
+    background: #454648;
     border-radius: 4px
 }
 
 .bc-card-select-content-active ul::-webkit-scrollbar-thumb:hover,
 .bc-card-select-dropdown-active-fullwidth ul::-webkit-scrollbar-thumb:hover {
-    background: #fff
+    background: #454648
 }
 
 .bc-card-select-content-active ul::-webkit-scrollbar-track,
@@ -34485,7 +34489,7 @@ bc-modal .bc-card-select-content-footer {
 .bc-card-product .error,
 .bc-card .error,
 .bc-card-image .error {
-    background-color: #fff
+    background-color: #454648
 }
 
 .bc-card .bc-card-body .bc-card-info .bc-card-status .error .text-error,
@@ -36364,7 +36368,7 @@ section.bc-circle-loading-circle {
 body {
     font-size: 1rem;
     font-family: "Open Sans", Arial, "sans-serif";
-    color: #fff;
+    color: #454648;
     line-height: 24px;
     letter-spacing: -0.3px;
     font-synthesis: none
@@ -36678,7 +36682,7 @@ h6.bc-serif {
 }
 
 .bc-status-color-black {
-    --bc-status-color: #ffffff;
+    --bc-status-color: #454648;
     --bc-status-bg: #353537;
     --bc-status-border-color: #2C2A29;
     --bc-status-bg-icon: #454648
@@ -39936,7 +39940,7 @@ section.bc-off-canvas[backdrop=off] {
 
 .bc-button-primary:disabled {
     background-color: #727476;
-    color: #353537
+    color: #97999b
 }
 
 .bc-button-primary:focus-visible {
@@ -41309,7 +41313,7 @@ section.bc-shortcut-group>:nth-child(n+8) {
 }
 
 .bc-tab-regular:hover:not(.active) {
-    color: #ffffff;
+    color: #454648;
     background: rgba(255, 255, 255, .08);
     border-radius: 8px 8px 0 0
 }
@@ -42868,7 +42872,7 @@ p.bc-badge-bl {
 .bc-card-container-stroke-2,
 .bc-card-container-stroke,
 .bc-card-container {
-    background-color: #454648;
+    background-color: #f9f9fa;
     height: auto;
     width: auto
 }
@@ -42916,18 +42920,18 @@ p.bc-badge-bl {
     border: 5px solid #e6c621;
     box-shadow: 0 12px 16px 0 rgba(24, 22, 21, .5607843137), 0 1px 10px 0 rgba(24, 22, 21, .3215686275);
     --bc-icon-button-bg: #353537;
-    --bc-icon-button-color: #ffffff;
-    --bc-icon-button-border-color: #ffffff
+    --bc-icon-button-color: #454648;
+    --bc-icon-button-border-color: #454648
 }
 
 .bc-icon-button-fab:hover {
     --bc-icon-button-bg: #454648;
-    --bc-icon-button-color: #ffffff
+    --bc-icon-button-color: #454648
 }
 
 .bc-icon-button-fab:active {
     --bc-icon-button-bg: #595a5c;
-    --bc-icon-button-color: #ffffff;
+    --bc-icon-button-color: #454648;
     --bc-icon-button-border-color: #353537
 }
 
@@ -43059,7 +43063,7 @@ p.bc-badge-bl {
 }
 
 .bc-icon-button-solid.bc-icon-button-black {
-    --bc-icon-button-bg: #ffffff;
+    --bc-icon-button-bg: #454648;
     --bc-icon-button-color: #2C2A29;
     --bc-icon-button-border-color: #2C2A29
 }
@@ -43072,7 +43076,7 @@ p.bc-badge-bl {
 .bc-icon-button-solid.bc-icon-button-black:active {
     --bc-icon-button-bg: #D9DADD;
     --bc-icon-button-color: #2C2A29;
-    --bc-icon-button-border-color: #ffffff
+    --bc-icon-button-border-color: #454648
 }
 
 .bc-icon-button-solid.bc-icon-button-black:disabled {
@@ -43086,18 +43090,18 @@ p.bc-badge-bl {
 
 .bc-icon-button-solid.bc-icon-button-white {
     --bc-icon-button-bg: #454648;
-    --bc-icon-button-color: #ffffff;
+    --bc-icon-button-color: #454648;
     --bc-icon-button-border-color: #2C2A29
 }
 
 .bc-icon-button-solid.bc-icon-button-white:hover {
     --bc-icon-button-bg: #595a5c;
-    --bc-icon-button-color: #ffffff
+    --bc-icon-button-color: #454648
 }
 
 .bc-icon-button-solid.bc-icon-button-white:active {
     --bc-icon-button-bg: #353537;
-    --bc-icon-button-color: #ffffff;
+    --bc-icon-button-color: #454648;
     --bc-icon-button-border-color: #454648
 }
 
@@ -43113,18 +43117,18 @@ p.bc-badge-bl {
 .bc-icon-button-outline {
     border: 1px solid #595a5c;
     --bc-icon-button-bg: transparent;
-    --bc-icon-button-color: #ffffff;
+    --bc-icon-button-color: #454648;
     --bc-icon-button-border-color: #595a5c
 }
 
 .bc-icon-button-outline:hover {
     --bc-icon-button-bg: #454648;
-    --bc-icon-button-color: #ffffff
+    --bc-icon-button-color: #454648
 }
 
 .bc-icon-button-outline:active {
     --bc-icon-button-bg: #353537;
-    --bc-icon-button-color: #ffffff;
+    --bc-icon-button-color: #454648;
     --bc-icon-button-border-color: transparent
 }
 
@@ -43185,17 +43189,17 @@ p.bc-badge-bl {
 .bc-icon-button-outline-inverse {
     border: 1px solid var(--bc-icon-button-border-color);
     --bc-icon-button-bg: transparent;
-    --bc-icon-button-color: #ffffff;
+    --bc-icon-button-color: #454648;
     --bc-icon-button-border-color: #595a5c
 }
 
 .bc-icon-button-outline-inverse:hover {
     --bc-icon-button-bg: #454648;
-    --bc-icon-button-color: #ffffff
+    --bc-icon-button-color: #454648
 }
 
 .bc-icon-button-outline-inverse:active {
-    --bc-icon-button-bg: #ffffff;
+    --bc-icon-button-bg: #454648;
     --bc-icon-button-color: #2C2A29;
     --bc-icon-button-border-color: transparent
 }
@@ -43257,20 +43261,20 @@ p.bc-badge-bl {
 .bc-icon-button-ghost {
     border: none;
     --bc-icon-button-bg: transparent;
-    --bc-icon-button-color: #ffffff;
-    --bc-icon-button-border-color: #ffffff;
+    --bc-icon-button-color: #454648;
+    --bc-icon-button-border-color: #454648;
     height: 48px;
     width: 48px
 }
 
 .bc-icon-button-ghost:hover {
     --bc-icon-button-bg: rgba(242, 242, 244, 0.08);
-    --bc-icon-button-color: #ffffff
+    --bc-icon-button-color: #454648
 }
 
 .bc-icon-button-ghost:active {
     --bc-icon-button-bg: rgba(242, 242, 244, 0.16);
-    --bc-icon-button-color: #ffffff;
+    --bc-icon-button-color: #454648;
     --bc-icon-button-border-color: transparent
 }
 
@@ -43783,7 +43787,8 @@ p.bc-badge-bl {
 }
 
 .link-underline:visited {
-    outline-color: #59cbe8
+    outline-color: #59cbe8;
+    color: #454648;
 }
 
 .link-underline:hover {
@@ -43840,7 +43845,8 @@ p.bc-badge-bl {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: none;
-    outline-color: #59cbe8
+    outline-color: #59cbe8;
+    color: #454648;
 }
 
 .link .link-underline {
@@ -44341,20 +44347,20 @@ p.bc-badge-bl {
 
 .bc-radio-group {
     box-sizing: border-box;
-    --main-color: #ffffff;
+    --main-color: #454648;
     --hover-color: rgba(255, 255, 255, 0.08);
     --outline-focus-visible-color: #59CBE8;
-    --border-color: #ffffff;
+    --border-color: #454648;
     --background-color: transparent;
     --checked-background-color: #2C2A29;
     --fill-color: #fdda24
 }
 
 .bc-radio-group-background-dark {
-    --main-color: #ffffff;
+    --main-color: #454648;
     --hover-color: rgba(255, 255, 255, 0.08);
     --outline-focus-visible-color: #59CBE8;
-    --border-color: #ffffff;
+    --border-color: #454648;
     --background-color: transparent;
     --checked-background-color: #2C2A29;
     --fill-color: #fdda24
@@ -45973,6 +45979,7 @@ bc-transaction-status {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 1.5rem;
+    color: #454648;
 }
 
 .bc-card-auth-body .bc-card-auth-description {
@@ -63131,7 +63138,7 @@ article.bc-key-validation-closing[role=dialog][aria-labelledby][aria-modal=true]
 }
 
 .bc-bg-brand-N-P-pair-50-00 {
-    background-color: #2c2a29
+    background-color: #f9f9fa;
 }
 
 .bc-border-brand-N-P-pair-50-00 {
@@ -71956,7 +71963,8 @@ article.bc-key-validation-closing[role=dialog][aria-labelledby][aria-modal=true]
     letter-spacing: 0px;
     font-synthesis: none;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale
+    -moz-osx-font-smoothing: grayscale;
+    color: #454648
 }
 
 .bc-opensans-font-style-2-regular {

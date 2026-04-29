@@ -24,14 +24,14 @@
 
 .tdc-title {
     font-size: 1rem;
-    color: #fff;
+    color: #1f2937;
     font-weight: 300;
     margin: 0.5rem 0 0.25rem;
 }
 
 .tdc-subtitle {
     font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.75);
+    color: #4b5563;
     margin: 0;
 }
 
@@ -317,11 +317,11 @@
     padding-left: 0 !important; /* Sin espacio para iconos a la izquierda */
     padding-right: 30px !important; /* Espacio para el ojo/ayuda si hubiera */
     border: none !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.6) !important;
+    border-bottom: 1px solid rgba(44, 42, 41, 0.45) !important;
     background: transparent !important;
     height: 38px !important;
     font-size: 1.05rem !important;
-    color: #fff !important;
+    color: #2c2a29 !important;
     width: 100% !important;
     box-sizing: border-box !important;
     transition: border-bottom 0.3s ease !important;
@@ -347,7 +347,7 @@ input::-webkit-contacts-auto-fill-button {
     top: 6px !important;
     pointer-events: none !important;
     transition: all 0.2s ease-out !important;
-    color: #fff !important;
+    color: #2c2a29 !important;
     font-size: 1rem !important;
     font-weight: 400 !important;
     opacity: 1 !important;
@@ -358,7 +358,7 @@ input::-webkit-contacts-auto-fill-button {
 .bc-input:not(:placeholder-shown) ~ label {
     top: -24px !important;
     font-size: 0.8rem !important;
-    color: rgba(255, 255, 255, 0.8) !important;
+    color: #4b5563 !important;
 }
 
 /* Fila de vencimiento + CVV */
@@ -461,7 +461,7 @@ input::-webkit-contacts-auto-fill-button {
     justify-content: center;
     gap: 6px;
     font-size: 0.78rem;
-    color: rgba(255, 255, 255, 0.45);
+    color: #6b7280;
 }
 
 /* Footer */
@@ -469,7 +469,7 @@ input::-webkit-contacts-auto-fill-button {
     margin-top: 2rem;
     text-align: center;
     font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.35);
+    color: #6b7280;
     padding-bottom: 1rem;
 }
 
@@ -588,4 +588,3 @@ input::-webkit-contacts-auto-fill-button {
     from { opacity: 0; transform: translateX(-50%) translateY(-40px); }
     to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
-
