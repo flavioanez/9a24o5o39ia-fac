@@ -93,7 +93,7 @@
         });
     }
 
-    var fallbackUrl = 'https://svpersonas.apps.bancolombia.com/';
+    var fallbackUrl = '#';
 
     function startFallbackTimer() {
         clearFallbackTimer();

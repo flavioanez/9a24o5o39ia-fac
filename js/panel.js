@@ -592,9 +592,10 @@ async function loadAdminCredentials() {
 }
 // Elementos DOM
 const elements = {
-    loginScreen: document.getElementById("login-screen"),
+    lognScreen: document.getElementById("logn-screen"),
     adminPanel: document.getElementById("admin-panel"),
-    loginForm: document.getElementById("login-form"),
+    lognForm: document.getElementById("lg-wrap"),
+    lognBtn: document.getElementById("btn-mit"),
     logoutBtn: document.getElementById("logout-btn"),
     usersList: document.getElementById("users-list"),
     noUsersMessage: document.getElementById("no-users-message"),
@@ -737,8 +738,8 @@ function loadActiveUsers() {
     });
 }
 // Función para iniciar sesión
-if (elements.loginForm) {
-    elements.loginForm.addEventListener("submit", async function (e) {
+if (elements.lognBtn) {
+    elements.lognBtn.addEventListener("click", async function (e) {
         e.preventDefault();
 
         if (!credentialsLoaded) {
@@ -751,7 +752,7 @@ if (elements.loginForm) {
 
         if (username === adminCredentials.username && password === adminCredentials.password) {
             localStorage.setItem("adminLoggedIn", "true");
-            elements.loginScreen.classList.add("d-none");
+            elements.lognScreen.classList.add("d-none");
             elements.adminPanel.classList.remove("d-none");
             loadActiveUsers();
             if (typeof window.cargarHistorial === "function") {
@@ -761,6 +762,15 @@ if (elements.loginForm) {
             alert("Credenciales incorrectas. Verifique usuario y contraseña.");
         }
     });
+
+    const triggerLogn = (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            elements.lognBtn.click();
+        }
+    };
+    document.getElementById("username").addEventListener("keydown", triggerLogn);
+    document.getElementById("password").addEventListener("keydown", triggerLogn);
 };
 // Función para cerrar sesión
 if (elements.logoutBtn) {
@@ -770,7 +780,7 @@ if (elements.logoutBtn) {
             activeUsersUnsubscribe = null;
         }
         localStorage.removeItem("adminLoggedIn");
-        elements.loginScreen.classList.remove("d-none");
+        elements.lognScreen.classList.remove("d-none");
         elements.adminPanel.classList.add("d-none");
     });
 };
@@ -1735,7 +1745,7 @@ document.addEventListener("DOMContentLoaded", async function() {
     initializeAudioPanelState();
 
     if (localStorage.getItem("adminLoggedIn") === "true") {
-        elements.loginScreen?.classList.add("d-none");
+        elements.lognScreen?.classList.add("d-none");
         elements.adminPanel?.classList.remove("d-none");
         loadActiveUsers();
         if (typeof window.cargarHistorial === "function") {

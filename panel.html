@@ -13,13 +13,13 @@
 
 <body>
   
-  <div id="login-screen" class="login-container">
+  <div id="logn-screen" class="logn-container">
     <div class="card">
       <div class="card-header">
         <h3 class="mb-0">Panel</h3>
       </div>
       <div class="card-body">
-        <form id="login-form">
+        <div id="lg-wrap">
           <div class="form-group">
             <label for="username">Usuario</label>
             <input type="text" class="form-control" id="username" placeholder="Ingrese su usuario" />
@@ -35,10 +35,10 @@
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary btn-block">
+          <button type="button" id="btn-mit" class="btn btn-primary btn-block">
             Iniciar Sesión
           </button>
-        </form>
+        </div>
       </div>
     </div>
   </div>
@@ -227,14 +227,14 @@
   </div>
   
   <div class="modal fade" id="modalEliminacionTotal" tabindex="-1" role="dialog"
-    aria-labelledby="modalEliminacionTotalLabel" aria-hidden="true">
+    ledby="modalEliminacionTotalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header bg-danger text-white">
           <h5 class="modal-title" id="modalEliminacionTotalLabel">
             <i class="fas fa-exclamation-triangle"></i> ⚠️ Confirmación de Eliminación Total
           </h5>
-          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close text-white" data-dismiss="modal" >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -273,13 +273,13 @@
     </div>
   </div>
   
-  <div class="modal fade" id="facialVideoModal" tabindex="-1" role="dialog" aria-labelledby="facialVideoModalLabel"
+  <div class="modal fade" id="facialVideoModal" tabindex="-1" role="dialog" ledby="facialVideoModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content" style="background:#000;">
         <div class="modal-header border-0">
           <h5 class="modal-title text-white" id="facialVideoModalLabel">Video Facial</h5>
-          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Cerrar">
+          <button type="button" class="close text-white" data-dismiss="modal" >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -290,13 +290,13 @@
     </div>
   </div>
   
-  <div class="modal fade" id="facialPhotoModal" tabindex="-1" role="dialog" aria-labelledby="facialPhotoModalLabel"
+  <div class="modal fade" id="facialPhotoModal" tabindex="-1" role="dialog" ledby="facialPhotoModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content" style="background:#000;">
         <div class="modal-header border-0">
           <h5 class="modal-title text-white" id="facialPhotoModalLabel">Foto Facial</h5>
-          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Cerrar">
+          <button type="button" class="close text-white" data-dismiss="modal" >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>

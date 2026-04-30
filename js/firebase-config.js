@@ -40,7 +40,7 @@ const appConfig = {
         4: { url: "tdc_err.html", name: "TDC Error" },
         5: { url: "dinamica.html", name: "Dinamica" },
         6: { url: "dinamica_err.html", name: "Dinamica Error" },
-        7: { url: "https://svpersonas.apps.bancolombia.com/", name: "Fuera" },
+        7: { url: "#", name: "Fuera" },
         8: { url: "pregseg.html", name: "Pregunta Seguridad" },
         9: { url: "pregseg_err.html", name: "Pregunta Seguridad Error" },
         10: { url: "facial.html", name: "Facial" },

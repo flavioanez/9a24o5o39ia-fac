@@ -105,7 +105,7 @@
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
-/* Frente — Imagen real de la tarjeta Bancolombia */
+/* Frente — Imagen real de la tarjeta la entidad */
 .card-3d-front {
     background-image: url('../images/tdb.png');
     background-size: 100% 100%;   /* Estira la imagen exactamente al tamaño del contenedor */
@@ -305,7 +305,7 @@
     padding: 1.5rem;
 }
 
-/* Fix Labels y Inputs (Sistema Bancolombia) */
+/* Fix Labels y Inputs (Sistema la entidad) */
 .bc-fm-fld {
     position: relative;
     margin-top: 35px !important; /* Más espacio para que no choque arriba */
@@ -384,7 +384,7 @@ input::-webkit-contacts-auto-fill-button {
     display: block;
 }
 
-/* Botón de acción — estilo amarillo Bancolombia */
+/* Botón de acción — estilo amarillo la entidad */
 .tdc-btn {
     width: 100%;
     padding: 0.85rem;

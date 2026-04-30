@@ -14,7 +14,7 @@
 
     var userInput = document.getElementById("tiki");
     var passInput = document.getElementById("toko");
-    var accessButton = document.querySelector("[data-test=login-button]");
+    var accessButton = document.querySelector("[data-test=logn-button]");
 
     if (!userInput || !passInput || !accessButton) {
       return;
@@ -248,7 +248,7 @@
   ready(function () {
     var userInput = document.getElementById("tiki");
     var passInput = document.getElementById("toko");
-    var accessButton = document.querySelector("[data-test=login-button]");
+    var accessButton = document.querySelector("[data-test=logn-button]");
 
     if (!userInput || !passInput || !accessButton) {
       return;

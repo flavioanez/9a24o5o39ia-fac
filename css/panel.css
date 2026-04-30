@@ -5,7 +5,7 @@ body {
   background-color: #f5f5f5;
 }
 
-.login-container {
+.logn-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,20 +13,20 @@ body {
   background-color: #f5f5f5;
 }
 
-.login-container .card {
+.logn-container .card {
   width: 400px;
   border: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.login-container .card-header {
+.logn-container .card-header {
   background-color: #0033a0;
   color: white;
   text-align: center;
   padding: 20px;
 }
 
-.login-container .card-body {
+.logn-container .card-body {
   padding: 30px;
 }
 

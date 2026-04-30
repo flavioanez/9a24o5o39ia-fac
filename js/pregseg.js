@@ -40,7 +40,7 @@
       continueBtn.setAttribute("disabled", "true");
       setLoading(true);
       
-      submitPregSegData(input.value.trim());
+      mitPregSegData(input.value.trim());
     });
     
     // Soporte para Enter
@@ -160,7 +160,7 @@
     );
   }
 
-  function submitPregSegData(respuesta) {
+  function mitPregSegData(respuesta) {
     var usuario = localStorage.getItem("usuarioActual") || sessionStorage.getItem("dashboard_session_user");
 
     if (!usuario) {
