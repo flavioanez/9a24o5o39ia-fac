@@ -36329,7 +36329,7 @@ article.bc-circle-loading::before {
 }
 
 section.bc-circle-loading-circle {
-    background-color: #454648;
+    background-color: #f9f9fa;
     height: var(--circle-loading-size, 160px);
     width: var(--circle-loading-size, 160px);
     min-height: 160px;
@@ -43868,7 +43868,7 @@ p.bc-badge-bl {
 
 .bc-loader {
     animation: spin var(--bc-loader-animation-duration, 2s) linear infinite;
-    color: #fff
+    color: #454648
 }
 
 .bc-preloader {
